@@ -1,4 +1,99 @@
 #HomePage{
     height: 100vh;
-    background: linear-gradient(180deg, #364050 0%, #121928 100%);
+    background: linear-gradient(180deg, #374151 0%, #111827 100%);
 }
+
+#HomePage .wall .lastUploadProject{
+    box-sizing: border-box;
+}
+
+#HomePage .wall .lastUploadProject .thumbnail{
+    border-radius: 10px;
+    object-fit: cover;
+    overflow: hidden;
+    width: 93vw;
+    height: 42vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#HomePage .wall .lastUploadProject:hover .thumbnail img{
+    transform: scale(110%);
+}
+
+#HomePage .wall .lastUploadProject .thumbnail img{
+    width: 100%;
+    height: 100%;
+}
+
+#HomePage .wall .lastUploadProject .projectInfo h4{
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.6;
+}
+
+#HomePage .wall .lastUploadProject .projectInfo .uploadedDate div{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+#HomePage .wall .lastUploadProject .projectInfo h1{
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 38px;
+}
+
+#HomePage .wall .lastUploadProject .projectInfo p{
+    color: rgba(255, 255, 255, 0.60);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    width: 83%;
+    letter-spacing: 1px;
+}
+
+#HomePage .wall .lastUploadProject .projectInfo .ownerInfo img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#HomePage .wall .lastUploadProject .projectInfo .ownerInfo h2{
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+
+#HomePage .wall .lastUploadProject .projectInfo .ownerInfo h3{
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+#HomePage .w-75{
+    width: 70% !important;
+}
+
+@media screen and (max-width: 1169px){
+    #HomePage .w-75{
+        width: 75% !important;
+    }
+}
+
+@media screen and (max-width: 991px){
+    #HomePage .wall .lastUploadProject .thumbnail {
+        width: 74vw;
+    }
+
+    #HomePage .wall .lastUploadProject{
+        padding-bottom: 15px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.10);;
+    }
+}
+
