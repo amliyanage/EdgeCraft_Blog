@@ -38,13 +38,16 @@ const HomePage = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="projectCardSet">
-                            <ProjectCard />
-                            <ProjectCard />
-                            <ProjectCard />
-                        </div>
+                    <div className="projectCardSet">
+                        <ProjectCard />
+                        <ProjectCard />
+                        <ProjectCard />
+                    </div>
 
+                    <div className={"d-flex justify-content-center mt-5 footer mb-5"}>
+                        Copyright (c) 2021 - Design By Nauval
                     </div>
 
                 </div>

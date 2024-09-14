@@ -87,20 +87,33 @@
     margin-top: 50px;
 }
 
+#HomePage .footer{
+    font-size: 18px;
+    font-weight: 400;
+    opacity: 0.6;
+    letter-spacing: 1px;
+}
+
 @media screen and (max-width: 1169px){
     #HomePage .w-75{
-        width: 75% !important;
+        width: 85% !important;
+    }
+    #HomePage .projectCardSet {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (max-width: 991px){
     #HomePage .wall .lastUploadProject .thumbnail {
-        width: 74vw;
+        width: 100%;
     }
 
     #HomePage .wall .lastUploadProject{
         padding-bottom: 15px;
         border-bottom: 2px solid rgba(255, 255, 255, 0.10);;
+    }
+    #HomePage .projectCardSet {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
