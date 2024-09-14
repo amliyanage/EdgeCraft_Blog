@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Sono:wght@200..800&display=swap');
+
+#navBar .navbar-brand div{
+    font-family: "Sono", monospace;
+    font-optical-sizing: auto;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 600;
+    background: #4B5563;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+#navBar a{
+    color: #FFFFFF;
+    font-family: "Patrick Hand", cursive;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#navBar .navbar-brand{
+    font-size: 18px;
+}
+
+#navBar .dropdown-menu{
+    background: #4B5563;
+    backdrop-filter: blur(10px);
+}
+
+#navBar .dropdown-menu li a:hover{
+    color: #121928;
+}
+
+#navBar .searchBar{
+    border-radius: 100px;
+    background: rgba(31, 41, 55, 0.60);
+    padding: 9px 18px;
+}
+
+#navBar .searchBar input{
+    font-family: "Patrick Hand", cursive;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+#navBar .searchBar input:focus{
+    outline: none;
+}
+
+#navBar .searchBar input::placeholder{
+    opacity: 0.6;
+}
