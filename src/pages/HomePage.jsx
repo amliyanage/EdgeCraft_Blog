@@ -2,6 +2,7 @@ import '../../src/assets/css/HomePage.css'
 import NavBar from "./component/NavBar.jsx";
 import lastUploadedProjectImgTemp from '../assets/image/thumbnail.png'
 import ownerProfileImgTemp from '../assets/image/OwnerImg.png'
+import ProjectCard from "./component/ProjectCard.jsx";
 
 const HomePage = () => {
     return (
@@ -36,6 +37,12 @@ const HomePage = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="projectCardSet">
+                            <ProjectCard />
+                            <ProjectCard />
+                            <ProjectCard />
                         </div>
 
                     </div>

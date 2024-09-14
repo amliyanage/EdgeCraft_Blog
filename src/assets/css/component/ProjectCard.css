@@ -1,0 +1,65 @@
+#ProjectCard *{
+    width: 100%;
+}
+
+#ProjectCard .Thumbnail{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#ProjectCard .projectInfo .infoHead h4{
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.6;
+    width: 4vw;
+}
+
+#ProjectCard .projectInfo h1{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 38px;
+}
+
+#ProjectCard .projectInfo p{
+    color: rgba(255, 255, 255, 0.60);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    width: 83%;
+    letter-spacing: 1px;
+}
+
+#ProjectCard .projectInfo .ownerInfo img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#ProjectCard .projectInfo .infoHead .uploadedDate div{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+#ProjectCard .projectInfo .ownerInfo h2{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+
+#ProjectCard .projectInfo .ownerInfo h3{
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.6;
+    margin: 0;
+}
+
+#ProjectCard:hover .Thumbnail img{
+    transform: scale(110%);
+}
