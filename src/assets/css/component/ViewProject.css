@@ -1,0 +1,62 @@
+#viewProject .infoHead h4{
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.6;
+    margin: 0;
+}
+
+#viewProject .infoHead .uploadedDate div{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.60);
+}
+
+#viewProject h1{
+    text-align: center;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 38px;
+    width: 50%;
+}
+
+#viewProject .ownerInfo img{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+#viewProject .ownerInfo h2{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    margin-bottom: 5px;
+}
+
+#viewProject .ownerInfo h3{
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.6;
+    margin: 0;
+}
+
+#viewProject img{
+    width: 70%;
+    height: 70%;
+}
+
+#viewProject p{
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 32px;
+    width: 60%;
+}
+
+#viewProject p + p{
+    font-size: 18px;
+    line-height: 35px;
+}
+
+#viewProject{
+    margin-bottom: 90px;
+}

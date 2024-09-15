@@ -2,9 +2,12 @@ import projectImgTemp from '../../assets/image/thumbnail-2.png'
 import ownerProfileImgTemp from "../../assets/image/OwnerImg.png";
 import '../../assets/css/component/ProjectCard.css'
 
-const ProjectCard = () =>{
+const ProjectCard = ({ handelView , projectData }) =>{
+
+    projectData = ""
+
     return(
-        <div id={"ProjectCard"}>
+        <div id={"ProjectCard"} onClick={() => handelView(projectData)}>
             <div className={"Thumbnail"}>
                 <img src={ projectImgTemp } alt="Project Thumbnail"/>
             </div>

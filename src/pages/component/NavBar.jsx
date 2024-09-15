@@ -1,11 +1,16 @@
 import '../../assets/css/component/NavBar.css'
 import {SearchIcon} from "../../util/Icons.jsx";
 
-const NavBar = () =>{
+const NavBar = ({ handelSecthion }) =>{
+
+    const handelCLick = (section) => {
+        handelSecthion(section);
+    }
+
     return (
         <nav id={"navBar"} className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand d-flex align-items-center gap-3" href="#">
+                <a className="navbar-brand d-flex align-items-center gap-3" href="#" onClick={ () => { handelCLick("Home") } }>
                     <div>
                         E
                     </div>
@@ -18,13 +23,13 @@ const NavBar = () =>{
                 </button>
                 <div className="collapse navbar-collapse ms-lg-5" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-4">
-                        <li className="nav-item">
+                        <li className="nav-item" onClick={ () => { handelCLick("UI Design") } }>
                             <a className="nav-link active" aria-current="page" href="#">UI Design</a>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item" onClick={ () => { handelCLick("Front-End") } }>
                             <a className="nav-link" href="#">Front-End</a>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item" onClick={ () => { handelCLick("Back-End") } }>
                             <a className="nav-link" href="#">Back-End</a>
                         </li>
                         <li className="nav-item dropdown">
@@ -33,12 +38,12 @@ const NavBar = () =>{
                                 Category
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Java</a></li>
-                                <li><a className="dropdown-item" href="#">Html</a></li>
+                                <li onClick={ () => { handelCLick("Java-Project") } } ><a className="dropdown-item" href="#">Java</a></li>
+                                <li onClick={ () => { handelCLick("Html-Project") } } ><a className="dropdown-item" href="#">Html</a></li>
                                 <li>
                                     <hr className="dropdown-divider"/>
                                 </li>
-                                <li><a className="dropdown-item" href="#">Js</a></li>
+                                <li onClick={ () => { handelCLick("Js-Project") } }><a className="dropdown-item" href="#">Js</a></li>
                             </ul>
                         </li>
                     </ul>
