@@ -1,5 +1,5 @@
 #adminPanel{
-    height: 100vh;
+    height: auto;
     background: linear-gradient(180deg, #374151 0%, #111827 100%);
 }
 
@@ -27,4 +27,15 @@
 
 #adminPanel > div > :nth-child(2){
     margin-top: 70px;
+}
+
+#adminPanel .project-list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+#adminPanel .footer h2{
+    font-size: 18px;
+    font-weight: 400;
 }
