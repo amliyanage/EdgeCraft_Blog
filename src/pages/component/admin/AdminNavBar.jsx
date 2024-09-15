@@ -4,7 +4,7 @@ import profilePic from '../../../assets/image/OwnerImg.png'
 const AdminNavBar = () => {
     return (
         <div id={"AdminNavBar"}>
-            <nav className="navbar fixed-top">
+            <nav className="navbar">
                 <div className="container-fluid">
                     <a className="navbar-brand d-flex align-items-center gap-3" href="#">
                         <div>
