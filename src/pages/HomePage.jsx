@@ -79,7 +79,7 @@ const HomePage = () => {
                     }
 
                     <div className={"d-flex justify-content-center mt-5 footer mb-5"}>
-                        Copyright (c) 2021 - Design By Nauval
+                        Copyright (c) 2021 - Design By Ashen
                     </div>
 
                 </div>

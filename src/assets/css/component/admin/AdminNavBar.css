@@ -1,0 +1,66 @@
+#AdminNavBar .navbar-brand div{
+    font-family: "Sono", monospace;
+    font-optical-sizing: auto;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 600;
+    background: #4B5563;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+#AdminNavBar a{
+    color: #FFFFFF;
+    font-family: "Patrick Hand", cursive;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#AdminNavBar .navbar-brand{
+    font-size: 18px;
+}
+
+#AdminNavBar .offcanvas{
+    background: rgb(75, 85, 99);
+}
+
+#AdminNavBar .offcanvas *{
+    font-family: Inter, sans-serif;
+}
+
+#AdminNavBar .offcanvas img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #269827;
+    overflow: hidden;
+}
+
+#AdminNavBar .offcanvas h1{
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+#AdminNavBar .offcanvas h2{
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+#AdminNavBar .offcanvas input{
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+}
+
+#AdminNavBar img{
+    width: 65px;
+    height: 65px;
+    overflow: hidden;
+}

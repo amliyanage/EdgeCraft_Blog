@@ -60,3 +60,15 @@
 #viewProject{
     margin-bottom: 90px;
 }
+
+@media screen and (max-width: 990px){
+    #viewProject h1 {
+        width: 66%;
+    }
+    #viewProject img {
+        width: 85%;
+    }
+    #viewProject p {
+        width: 75%;
+    }
+}
