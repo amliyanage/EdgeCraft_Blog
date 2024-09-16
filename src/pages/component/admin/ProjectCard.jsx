@@ -1,5 +1,5 @@
 import thumbnail from '../../../assets/image/thumbnail.png'
-import '../../../assets/css/admin/ProjectCard.css'
+import '../../../assets/css/component/admin/ProjectCard.css'
 
 const ProjectCard = ({ project }) => {
     return(

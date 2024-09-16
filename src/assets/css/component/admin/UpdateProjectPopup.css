@@ -1,0 +1,42 @@
+#UpdateProjectPopup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.62);
+    z-index: 100;
+}
+
+#UpdateProjectPopup > div{
+    background: #374151;
+    width: 90%;
+    height: 90%;
+}
+
+#UpdateProjectPopup .editSection{
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+}
+
+#UpdateProjectPopup input{
+    font-family: Poppins, sans-serif;
+}
+
+#UpdateProjectPopup label{
+    color: #000000;
+}
+
+#UpdateProjectPopup .preview{
+    background: linear-gradient(180deg, #374151 0%, #111827 100%);
+}
+
+#UpdateProjectPopup #viewProject::-webkit-scrollbar{
+    width: 10px;
+    background: #111827;
+}
+
+#UpdateProjectPopup #viewProject{
+    height: 83vh;
+    overflow-y: scroll;
+    margin: 0 !important;
+}

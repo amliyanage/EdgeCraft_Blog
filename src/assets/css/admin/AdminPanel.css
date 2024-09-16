@@ -39,3 +39,9 @@
     font-size: 18px;
     font-weight: 400;
 }
+
+@media screen and (max-width: 991px){
+    #adminPanel .project-list{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
