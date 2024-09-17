@@ -1,9 +1,9 @@
 import '../../../assets/css/component/admin/LoginPage.css';
 import { useState } from "react";
-import { adminRegister } from "../../../service/adminService.js";
+import {adminLogin, adminRegister} from "../../../service/adminService.js";
 
-const LoginPage = () => {
-    const [loginOrRegister, setLoginOrRegister] = useState("Register");
+const LoginPage = ({handelLoginToSystem}) => {
+    const [loginOrRegister, setLoginOrRegister] = useState("login");
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -26,11 +26,27 @@ const LoginPage = () => {
         formData.append("file", profilePic);
 
         try {
-            await adminRegister(formData);
+            if (await adminRegister(formData)){
+                setLoginOrRegister("login");
+            }
         } catch (error) {
             console.log(error);
         }
     };
+
+    const handelLogin = () => {
+
+        const params = {
+            email: email,
+            password: password
+        };
+
+        adminLogin(params).then(r => {
+            if (r) {
+                 handelLoginToSystem();
+            }
+        });
+    }
 
     return (
         <div id="LoginPage">
@@ -48,7 +64,7 @@ const LoginPage = () => {
                                    placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
                             <label htmlFor="floatingPassword">Password</label>
                         </div>
-                        <button type="button" className="btn btn-success w-100 py-3 mt-3">Login</button>
+                        <button type="button" className="btn btn-success w-100 py-3 mt-3" onClick={ handelLogin }>Login</button>
                         <a href="" onClick={(e) => { handelLoginOrRegister("register", e) }}>Register</a>
                     </div>
                 ) : (

@@ -9,11 +9,18 @@ import LoginPage from "./component/admin/LoginPage.jsx";
 const AdminPanel = () => {
 
     const [projectPopup, setProjectPopup] = useState(false);
+    const [loginPopup, setLoginPopup] = useState(true);
+
+    const handelLoginPopup = () => {
+        setLoginPopup(!loginPopup);
+    }
 
   return (
     <div id={"adminPanel"} className={"d-flex justify-content-center"}>
 
-        <LoginPage/>
+        {
+            loginPopup && <LoginPage handelLoginToSystem={handelLoginPopup}/>
+        }
 
         {
             projectPopup && <UpdateProjectPopup/>
