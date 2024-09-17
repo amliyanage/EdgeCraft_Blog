@@ -43,7 +43,7 @@ const LoginPage = ({handelLoginToSystem}) => {
 
         adminLogin(params).then(r => {
             if (r) {
-                 handelLoginToSystem();
+                 handelLoginToSystem(email);
             }
         });
     }

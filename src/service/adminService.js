@@ -32,3 +32,26 @@ export const adminLogin = async (params) => {
         alert(error.response.data);
     }
 }
+
+export const getUserData = async (email) => {
+    const end_point = `http://localhost:8080/edge_craft/v1/user/${email}`;
+
+    try {
+        return await axios.get(end_point);
+    } catch (error) {
+        alert(error.response.data);
+    }
+}
+
+export const getUserPic = async (userName) => {
+    const end_point = `http://localhost:8080/edge_craft/v1/user/profilePic/${userName}`;
+
+    try {
+        const response = await axios.get(end_point, { responseType: 'blob' });
+        const url = URL.createObjectURL(response.data);
+        return url;
+    } catch (error) {
+        alert(error.response?.data || 'Failed to fetch image');
+        return null;
+    }
+}
