@@ -4,6 +4,7 @@ import {SearchIcon} from "../util/Icons.jsx";
 import ProjectCard from "./component/admin/ProjectCard.jsx";
 import UpdateProjectPopup from "./component/admin/UpdateProjectPopup.jsx";
 import {useState} from "react";
+import LoginPage from "./component/admin/LoginPage.jsx";
 
 const AdminPanel = () => {
 
@@ -11,6 +12,8 @@ const AdminPanel = () => {
 
   return (
     <div id={"adminPanel"} className={"d-flex justify-content-center"}>
+
+        <LoginPage/>
 
         {
             projectPopup && <UpdateProjectPopup/>

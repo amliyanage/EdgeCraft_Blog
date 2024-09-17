@@ -1,0 +1,33 @@
+#LoginPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.68);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+#LoginPage > div{
+    background: #111827;
+    width: 30%;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#LoginPage input{
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#LoginPage label{
+    color: black;
+}
+
+#LoginPage a{
+    font-size: 18px;
+    color: #6b6b6b;
+    letter-spacing: 1px;
+}
