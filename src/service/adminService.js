@@ -55,3 +55,16 @@ export const getUserPic = async (userName) => {
         return null;
     }
 }
+
+export const updateUserData = async (params) => {
+    const end_point = 'http://localhost:8080/edge_craft/v1/user';
+    try {
+        // Pass params directly as query parameters
+        const response = await axios.put(end_point, null, { params });
+        return response;
+    } catch (e) {
+        console.error("Error updating user data:", e);
+        alert("Failed to update user data");
+    }
+};
+
