@@ -1,23 +1,46 @@
+import PropTypes from 'prop-types';
 import '../../../assets/css/component/admin/AdminNavBar.css'
 import { useState, useEffect } from 'react';
 import { updateUserData } from "../../../service/adminService.js";
 
 const AdminNavBar = ({ userData, userPic }) => {
+
+    AdminNavBar.propTypes = {
+        userData: PropTypes.object.isRequired,
+        userPic: PropTypes.object.isRequired
+    }
+
     const [email, setEmail] = useState(userData.email);
     const [password, setPassword] = useState(userData.password);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
     const handleUpdateUserData = async () => {
+        if (!email || !password) {
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+        if (!passwordRegex.test(password)) {
+            alert('Password must contain at least 8 characters, including uppercase, lowercase letters, and numbers');
+            return;
+        }
+
         const params = {
             email: email,
             password: password,
-            userName: userData.userName
+            username: userData.userName
         };
+
         try {
+            console.log('Updating user data...', params);
             const response = await updateUserData(params);
-            if (response.status === 200) {
+            if (response && response.status === 201) {
                 alert('User data updated successfully!');
-            } else {
-                alert('Failed to update user data.');
             }
         } catch (error) {
             console.error('Error updating user data:', error);
@@ -25,8 +48,6 @@ const AdminNavBar = ({ userData, userPic }) => {
         }
     };
 
-
-    // Sync form fields with props if they change
     useEffect(() => {
         setEmail(userData.email);
         setPassword(userData.password);

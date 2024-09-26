@@ -49,8 +49,7 @@ export const getUserPic = async (userName) => {
 
     try {
         const response = await axios.get(end_point, { responseType: 'blob' });
-        const url = URL.createObjectURL(response.data);
-        return url;
+        return URL.createObjectURL(response.data);
     } catch (error) {
         alert(error.response?.data || 'Failed to fetch image');
         return null;
