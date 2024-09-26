@@ -1,8 +1,29 @@
-import React, {useState} from 'react';
+import PropTypes from "prop-types";
 import '../../../assets/css/component/admin/UpdateProjectPopup.css';
-import ownerProfileImgTemp from "../../../assets/image/OwnerImg.png";
+import {useEffect, useState} from "react";
 
-const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic}) => {
+const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,projectType,projectImg}) => {
+
+    const [saveBtn, setSaveBtn] = useState(true);
+
+    UpdateProjectPopup.propTypes = {
+        projectData: PropTypes.object.isRequired,
+        handelProjectPouUp: PropTypes.func.isRequired,
+        userData: PropTypes.object.isRequired,
+        userPic: PropTypes.string.isRequired,
+        projectType: PropTypes.string.isRequired,
+        projectImg: PropTypes.object.isRequired
+    }
+
+    useEffect(() => {
+         setTitle(projectData.projectTitle);
+         setDescription(projectData.description);
+         setSummery(projectData.summery);
+         setGithubLink(projectData.gitHubLink);
+         setFile(projectImg)
+        setOption(projectData.projectType);
+         setSaveBtn(false);
+    }, [projectType === "Update"]);
 
     const [title , setTitle] = useState("");
     const [description , setDescription] = useState("");
@@ -54,35 +75,45 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic}) =
                         <div className="form-floating mb-4">
                             <input type="text" className="form-control" placeholder="Title" onChange={(e) => {
                                 setTitle(e.target.value)
-                            }}/>
+                            }}
+                            defaultValue={title}
+                            />
                             <label htmlFor="floatingInput">Title</label>
                         </div>
                         <div className="form-floating mb-4">
                             <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                                       style={{height: '300px'}} onChange={(e) => {
                                 setDescription(e.target.value)
-                            }}></textarea>
+                            }}
+                            defaultValue={description}
+                            ></textarea>
                             <label htmlFor="floatingTextarea2">Description</label>
                         </div>
                         <div className="form-floating mb-4">
                             <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                                       style={{height: '200px'}} onChange={(e) => {
                                 setSummery(e.target.value)
-                            }}></textarea>
+                            }}
+                            defaultValue={summery}
+                            ></textarea>
                             <label htmlFor="floatingTextarea2">Summery</label>
                         </div>
                         <div className={"d-flex align-items-center mb-4 gap-4"}>
                             <div className="input-group ">
                                 <input type="file" className="form-control" onChange={(e) => {
                                     handelThumbnail(e)
-                                }}/>
+                                }}
+                                defaultValue={file}
+                                />
                                 <label className="input-group-text" htmlFor="inputGroupFile02">Upload</label>
                             </div>
                             <div className="input-group">
                                 <label className="input-group-text" htmlFor="inputGroupSelect01">Options</label>
                                 <select className="form-select" id="inputGroupSelect01" onChange={(e) => {
                                     setOption(e.target.value)
-                                }}>
+                                }}
+                                defaultValue={option}
+                                onSelect={option}>
                                     <option selected>Choose...</option>
                                     <option value="UI Design">UI Design</option>
                                     <option value="Front End">Front End</option>
@@ -94,11 +125,14 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic}) =
                         <div className="form-floating mb-4">
                             <input type="text" className="form-control" placeholder="GitHub Link" onChange={(e) => {
                                 setGithubLink(e.target.value)
-                            }}/>
+                            }} defaultValue={githubLink}
+                            />
                             <label htmlFor="floatingInput">GitHub Link</label>
                         </div>
                         <div className={"d-flex gap-4"}>
-                            <button className={"btn btn-success px-5"}>Save</button>
+                            {
+                                saveBtn && <button className={"btn btn-success px-5"} onClick={saveProject}>Save</button>
+                            }
                             <button className={"btn btn-warning px-5"}>Update</button>
                             <button className={"btn btn-danger px-5"}>Delete</button>
                         </div>

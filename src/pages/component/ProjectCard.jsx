@@ -28,7 +28,7 @@ const ProjectCard = ({ handelView , projectData }) =>{
     console.log(projectData)
 
     return(
-        <div id={"ProjectCard"} onClick={() => handelView(projectData)}>
+        <div id={"ProjectCard"} onClick={() => handelView(projectData,"Update",projectImg)}>
             <div className={"Thumbnail"}>
                 <img src={ projectImg } alt="Project Thumbnail"/>
             </div>

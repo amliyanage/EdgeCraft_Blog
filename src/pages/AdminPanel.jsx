@@ -15,6 +15,9 @@ const AdminPanel = () => {
     const [userData, setUserData] = useState({});
     const [userPic, setUserPic] = useState(null);
     const [projects, setProjects] = useState([]);
+    const [projectData, setProjectData] = useState({});
+    const [projectType, setProjectType] = useState("");
+    const [projectImg, setProjectImg] = useState(null);
 
     const handelLoginPopup = (email) => {
         setLoginPopup(!loginPopup);
@@ -33,7 +36,10 @@ const AdminPanel = () => {
         }
     }, [loginPopup, userEmail]);
 
-    const handelProjectPopup = () => {
+    const handelProjectPopup = (projectData,projectType,projectImg) => {
+        setProjectData(projectData);
+        setProjectType(projectType);
+        setProjectImg(projectImg);
         setProjectPopup(!projectPopup);
     }
 
@@ -46,7 +52,7 @@ const AdminPanel = () => {
     return (
         <div id={"adminPanel"} className={"d-flex justify-content-center"}>
             {loginPopup && <LoginPage handelLoginToSystem={handelLoginPopup} />}
-            {projectPopup && <UpdateProjectPopup handelProjectPouUp={handelProjectPopup} userData={userData} userPic={userPic} />}
+            {projectPopup && <UpdateProjectPopup projectData={projectData} handelProjectPouUp={handelProjectPopup} userData={userData} userPic={userPic} projectType={projectType} projectImg={projectImg} />}
             <div className={"w-75 mt-3"}>
                 <AdminNavBar userData={userData} userPic={userPic} />
                 <div className={"d-flex justify-content-between flex-lg-row flex-column gap-4"}>
