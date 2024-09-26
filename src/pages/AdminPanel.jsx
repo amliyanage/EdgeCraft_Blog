@@ -6,6 +6,7 @@ import AdminNavBar from "./component/admin/AdminNavBar.jsx";
 import UpdateProjectPopup from "./component/admin/UpdateProjectPopup.jsx";
 import LoginPage from "./component/admin/LoginPage.jsx";
 import '../assets/css/admin/AdminPanel.css';
+import {getUserProjects} from "../service/ProjectService.js";
 
 const AdminPanel = () => {
     const [projectPopup, setProjectPopup] = useState(false);
@@ -13,6 +14,7 @@ const AdminPanel = () => {
     const [userEmail, setUserEmail] = useState("");
     const [userData, setUserData] = useState({});
     const [userPic, setUserPic] = useState(null);
+    const [projects, setProjects] = useState([]);
 
     const handelLoginPopup = (email) => {
         setLoginPopup(!loginPopup);
@@ -27,11 +29,18 @@ const AdminPanel = () => {
                     setUserPic(url);
                 });
             });
+        loadProjects();
         }
     }, [loginPopup, userEmail]);
 
     const handelProjectPopup = () => {
         setProjectPopup(!projectPopup);
+    }
+
+    async function loadProjects() {
+        const userProjects = await getUserProjects(userEmail);
+        setProjects(userProjects.data);
+        console.log(projects);
     }
 
     return (
@@ -48,10 +57,13 @@ const AdminPanel = () => {
                     <button className={"border-0"} onClick={handelProjectPopup}>New Project</button>
                 </div>
                 <div className="project-list mt-5">
-                    <ProjectCard />
-                    <ProjectCard />
-                    <ProjectCard />
-                    <ProjectCard />
+                    {
+                        projects.map((project) =>{
+                            return (
+                                <ProjectCard projectData={project} handelView={handelProjectPopup} />
+                            )
+                        })
+                    }
                 </div>
                 <div className="footer mt-5 d-flex justify-content-center mb-5">
                     <h2>Copyright (c) 2024 - Design By Ashen</h2>
