@@ -9,3 +9,15 @@ export function getUserProjects (email) {
         alert(error.response.data);
     }
 }
+
+export async function getProjectImg(projectTitle) {
+    const end_point = `http://localhost:8080/edge_craft/v1/projects/getProjectThumbnail/${projectTitle}`;
+
+    try {
+        const response = await axios.get(end_point, {responseType: 'blob'});
+        return URL.createObjectURL(response.data);
+    } catch (error) {
+        alert(error.response?.data || 'Failed to fetch image');
+        return null;
+    }
+}

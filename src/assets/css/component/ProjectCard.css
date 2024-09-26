@@ -64,6 +64,10 @@
     transform: scale(110%);
 }
 
+#ProjectCard .projectInfo .infoHead .uploadedDate h4{
+    width: auto;
+}
+
 @media screen and (max-width: 991px){
     #ProjectCard .projectInfo .infoHead h4{
         width: 11vw;
