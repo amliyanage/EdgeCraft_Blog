@@ -40,3 +40,7 @@
     overflow-y: scroll;
     margin: 0 !important;
 }
+
+#UpdateProjectPopup option{
+    color: black;
+}

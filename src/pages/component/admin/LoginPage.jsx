@@ -1,8 +1,14 @@
+import PropTypes from 'prop-types';
 import '../../../assets/css/component/admin/LoginPage.css';
 import { useState } from "react";
 import {adminLogin, adminRegister} from "../../../service/adminService.js";
 
-const LoginPage = ({handelLoginToSystem}) => {
+const LoginPage = ({ handelLoginToSystem }) => {
+
+    LoginPage.propTypes = {
+        handelLoginToSystem: PropTypes.func.isRequired,
+    };
+
     const [loginOrRegister, setLoginOrRegister] = useState("login");
 
     const [username, setUsername] = useState("");
@@ -11,22 +17,51 @@ const LoginPage = ({handelLoginToSystem}) => {
     const [password, setPassword] = useState("");
     const [profilePic, setProfilePic] = useState(null);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    const roleRegex = /^[a-zA-Z\s]*$/;
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+
     const handelLoginOrRegister = (type, e) => {
         e.preventDefault();
         setLoginOrRegister(type);
     };
 
-    const handelRegister = async () => {
-        const formData = new FormData();
+    const handleRegister = async () => {
+        if (!username || !email || !role || !password || !profilePic) {
+            alert("Please fill all the fields");
+            return;
+        }
 
+        if (!usernameRegex.test(username)) {
+            alert("Username can only contain letters, numbers, and underscores");
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address");
+            return;
+        }
+
+        if (!passwordRegex.test(password)) {
+            alert("Password must contain at least 8 characters, including uppercase, lowercase letters, and numbers");
+            return;
+        }
+
+        if (!roleRegex.test(role)) {
+            alert("Role must contain only letters and spaces");
+            return;
+        }
+
+        const formData = new FormData();
         formData.append("userName", username);
         formData.append("email", email);
         formData.append("password", password);
         formData.append("role", role);
-        formData.append("file", profilePic);
+        formData.append("profilePic", profilePic);
 
         try {
-            if (await adminRegister(formData)){
+            if (await adminRegister(formData)) {
                 setLoginOrRegister("login");
             }
         } catch (error) {
@@ -56,7 +91,7 @@ const LoginPage = ({handelLoginToSystem}) => {
                         <h1>Login</h1>
                         <div className="form-floating mb-3 w-100">
                             <input type="email" className="form-control" id="floatingInput"
-                                   placeholder="name@example.com" onChange={(e) => { setEmail(e.target.value) }} />
+                                   placeholder="name@example.com" onChange={(e) => { setEmail(e.target.value) }}/>
                             <label htmlFor="floatingInput">Email address</label>
                         </div>
                         <div className="form-floating w-100">
@@ -95,7 +130,7 @@ const LoginPage = ({handelLoginToSystem}) => {
                                    placeholder="Input Profile Pic" onChange={(e) => { setProfilePic(e.target.files[0]) }} />
                             <label className="input-group-text" htmlFor="inputGroupFile02">Upload Profile</label>
                         </div>
-                        <button type="button" className="btn btn-success w-100 py-3" onClick={handelRegister}>Register</button>
+                        <button type="button" className="btn btn-success w-100 py-3" onClick={handleRegister}>Register</button>
                         <a href="" onClick={(e) => { handelLoginOrRegister("login", e) }}>Login</a>
                     </div>
                 )

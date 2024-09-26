@@ -24,6 +24,7 @@
     width: 55px;
     height: 55px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 #viewProject .ownerInfo h2{

@@ -1,25 +1,26 @@
 import axios from "axios";
 
 export const adminRegister = async (formData) => {
-    const end_point = "http://localhost:8080/edge_craft/v1/user";
+
+    const end_point = "http://localhost:8080/edge_craft/v1/users";
 
     try {
-        const response = await axios.post(end_point, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-        if (response.status === 200) {
-            alert(response.data);
-            return true
+        const response = await axios.post(end_point, formData);
+        if (response.status === 201) {
+            alert(response.data)
+            return true;
         }
-    } catch (error) {
+        else {
+            alert(response.data);
+        }
+    }catch (error) {
         alert(error.response.data);
     }
+
 };
 
 export const adminLogin = async (params) => {
-    const end_point = "http://localhost:8080/edge_craft/v1/user/login";
+    const end_point = "http://localhost:8080/edge_craft/v1/users/login";
 
     try {
         const response = await axios.get(end_point, {
@@ -34,7 +35,7 @@ export const adminLogin = async (params) => {
 }
 
 export const getUserData = async (email) => {
-    const end_point = `http://localhost:8080/edge_craft/v1/user/${email}`;
+    const end_point = `http://localhost:8080/edge_craft/v1/users/${email}`;
 
     try {
         return await axios.get(end_point);
@@ -44,7 +45,7 @@ export const getUserData = async (email) => {
 }
 
 export const getUserPic = async (userName) => {
-    const end_point = `http://localhost:8080/edge_craft/v1/user/profilePic/${userName}`;
+    const end_point = `http://localhost:8080/edge_craft/v1/users/profilePic/${userName}`;
 
     try {
         const response = await axios.get(end_point, { responseType: 'blob' });
@@ -57,11 +58,9 @@ export const getUserPic = async (userName) => {
 }
 
 export const updateUserData = async (params) => {
-    const end_point = 'http://localhost:8080/edge_craft/v1/user';
+    const end_point = 'http://localhost:8080/edge_craft/v1/users';
     try {
-        // Pass params directly as query parameters
-        const response = await axios.put(end_point, null, { params });
-        return response;
+        return await axios.put(end_point, null, {params});
     } catch (e) {
         console.error("Error updating user data:", e);
         alert("Failed to update user data");
