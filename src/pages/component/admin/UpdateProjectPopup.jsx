@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import '../../../assets/css/component/admin/UpdateProjectPopup.css';
 import {useEffect, useState} from "react";
+import {saveProject} from "../../../service/ProjectService.js";
 
 const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,projectType,projectImg}) => {
 
     const [saveBtn, setSaveBtn] = useState(true);
+    const [otherBtn, setOtherBtn] = useState(true);
 
     UpdateProjectPopup.propTypes = {
         projectData: PropTypes.object.isRequired,
@@ -16,14 +18,19 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
     }
 
     useEffect(() => {
-         setTitle(projectData.projectTitle);
-         setDescription(projectData.description);
-         setSummery(projectData.summery);
-         setGithubLink(projectData.gitHubLink);
-         setFile(projectImg)
-        setOption(projectData.projectType);
-         setSaveBtn(false);
-    }, [projectType === "Update"]);
+        if (projectType === "Update") {
+            setTitle(projectData.projectTitle);
+            setDescription(projectData.description);
+            setSummery(projectData.summery);
+            setGithubLink(projectData.gitHubLink);
+            setFile(projectImg);
+            setOption(projectData.projectType);
+            setSaveBtn(false);
+        }
+        else {
+            setOtherBtn(false);
+        }
+    }, [projectType, projectData, projectImg]);
 
     const [title , setTitle] = useState("");
     const [description , setDescription] = useState("");
@@ -31,6 +38,7 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
     const [githubLink , setGithubLink] = useState("");
     const [file , setFile] = useState(null);
     const [option , setOption] = useState("");
+    const [sendImg , setSendImg] = useState(null);
 
     const handleCurrentTimeAndDate = () => {
         const now = new Date();
@@ -38,12 +46,12 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         const month = now.toLocaleString('default', { month: 'long' });
         const year = now.getFullYear();
 
-        // Construct the formatted date with manual spacing
         return `${month} ${day}, ${year}`;
     };
 
     const handelThumbnail = (e) => {
         const file = e.target.files[0];
+        setSendImg(file);
         if (file){
             const reader = new FileReader();
             reader.onload = () => {
@@ -55,15 +63,23 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         }
     }
 
-    const saveProject = () => {
-        const project = {
-            title: title,
-            description: description,
-            summery: summery,
-            githubLink: githubLink,
-            file: file,
-            option: option
-        }
+    const saveBtnOnAction = () => {
+
+        const formData = new FormData();
+        formData.append('projectDes', description);
+        formData.append('projectTitle', title);
+        formData.append('projectType', option);
+        formData.append("projectDate", handleCurrentTimeAndDate());
+        formData.append("projectOwnerEmail", userData.email);
+        formData.append("projectSummery", summery);
+        formData.append("projectGitUrl", githubLink);
+        formData.append("projectThumbnail", sendImg);
+
+        console.log(userData.email)
+        console.log(formData);
+
+        saveProject(formData).then(r =>  alert(r))
+
     }
 
     return (
@@ -131,10 +147,14 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
                         </div>
                         <div className={"d-flex gap-4"}>
                             {
-                                saveBtn && <button className={"btn btn-success px-5"} onClick={saveProject}>Save</button>
+                                saveBtn && <button className={"btn btn-success px-5"} onClick={saveBtnOnAction}>Save</button>
                             }
-                            <button className={"btn btn-warning px-5"}>Update</button>
-                            <button className={"btn btn-danger px-5"}>Delete</button>
+                            {
+                                otherBtn && <button className={"btn btn-warning px-5"}>Update</button>
+                            }
+                            {
+                                otherBtn && <button className={"btn btn-danger px-5"}>Delete</button>
+                            }
                         </div>
                     </div>
                     <div className={"pe-3"}>

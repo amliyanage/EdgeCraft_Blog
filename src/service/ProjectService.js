@@ -21,3 +21,22 @@ export async function getProjectImg(projectTitle) {
         return null;
     }
 }
+
+export async function saveProject(formData) {
+    const end_point = "http://localhost:8080/edge_craft/v1/projects"
+
+    try {
+        const response = await axios.post(end_point, formData);
+        console.log(response);
+        if (response.status === 200) {
+            alert(response.data)
+            return true;
+        }
+        else {
+            alert(response.data);
+        }
+    }catch (error) {
+        alert(error.response.data);
+    }
+
+}

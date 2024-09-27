@@ -60,7 +60,7 @@ const AdminPanel = () => {
                         <SearchIcon />
                         <input type="text" placeholder="Search.." className={"bg-transparent border-0"} />
                     </div>
-                    <button className={"border-0"} onClick={handelProjectPopup}>New Project</button>
+                    <button className={"border-0"} onClick={() => handelProjectPopup(null,"Save",null)}>New Project</button>
                 </div>
                 <div className="project-list mt-5">
                     {
