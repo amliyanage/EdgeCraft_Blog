@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import '../../../assets/css/component/admin/UpdateProjectPopup.css';
 import {useEffect, useState} from "react";
-import {saveProject} from "../../../service/ProjectService.js";
+import {saveProject, updateProject} from "../../../service/ProjectService.js";
 
 const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,projectType,projectImg}) => {
 
@@ -17,6 +17,19 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         projectImg: PropTypes.object.isRequired
     }
 
+    const [title , setTitle] = useState("");
+    const [description , setDescription] = useState("");
+    const [summery , setSummery] = useState("");
+    const [githubLink , setGithubLink] = useState("");
+    const [file , setFile] = useState(null);
+    const [option , setOption] = useState("");
+    const [sendImg , setSendImg] = useState(null);
+    const [date , setDate] = useState("");
+
+    useEffect(() => {
+        setDate(handleCurrentTimeAndDate());
+    }, []);
+
     useEffect(() => {
         if (projectType === "Update") {
             setTitle(projectData.projectTitle);
@@ -26,19 +39,12 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
             setFile(projectImg);
             setOption(projectData.projectType);
             setSaveBtn(false);
+            setDate(projectData.date);
         }
         else {
             setOtherBtn(false);
         }
     }, [projectType, projectData, projectImg]);
-
-    const [title , setTitle] = useState("");
-    const [description , setDescription] = useState("");
-    const [summery , setSummery] = useState("");
-    const [githubLink , setGithubLink] = useState("");
-    const [file , setFile] = useState(null);
-    const [option , setOption] = useState("");
-    const [sendImg , setSendImg] = useState(null);
 
     const handleCurrentTimeAndDate = () => {
         const now = new Date();
@@ -69,7 +75,7 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         formData.append('projectDes', description);
         formData.append('projectTitle', title);
         formData.append('projectType', option);
-        formData.append("projectDate", handleCurrentTimeAndDate());
+        formData.append("projectDate", date);
         formData.append("projectOwnerEmail", userData.email);
         formData.append("projectSummery", summery);
         formData.append("projectGitUrl", githubLink);
@@ -78,9 +84,40 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         console.log(userData.email)
         console.log(formData);
 
-        saveProject(formData).then(r =>  alert(r))
+        saveProject(formData)
 
     }
+
+    const updateBtnOnAction = () => {
+        const formData = new FormData();
+
+        formData.append('projectId', projectData.projectId);
+        formData.append('projectDes', description);
+        formData.append('projectTitle', title);
+        formData.append('projectType', option);
+        formData.append("projectDate", date);
+        formData.append("projectSummery", summery);
+        formData.append("projectGitUrl", githubLink);
+
+        if (sendImg) {
+            formData.append("projectThumbnail", sendImg);
+        } else {
+            fetch(projectImg)
+                .then(res => res.blob())
+                .then(blob => {
+                    const file = new File([blob], "project-thumbnail.jpg", { type: "image/jpeg" });
+                    formData.append("projectThumbnail", file);
+
+                    updateProject(formData);
+                })
+                .catch(err => console.error("Error converting blob to file:", err));
+        }
+
+        if (sendImg) {
+            updateProject(formData);
+        }
+    };
+
 
     return (
         <div id="UpdateProjectPopup" className="d-flex justify-content-center align-items-center">
@@ -150,7 +187,7 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
                                 saveBtn && <button className={"btn btn-success px-5"} onClick={saveBtnOnAction}>Save</button>
                             }
                             {
-                                otherBtn && <button className={"btn btn-warning px-5"}>Update</button>
+                                otherBtn && <button className={"btn btn-warning px-5"} onClick={updateBtnOnAction}>Update</button>
                             }
                             {
                                 otherBtn && <button className={"btn btn-danger px-5"}>Delete</button>
@@ -167,7 +204,7 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
                                     </div>
                                     <div className="uploadedDate d-flex align-items-center gap-3">
                                         <div></div>
-                                        <h4>{handleCurrentTimeAndDate()}</h4>
+                                        <h4>{date}</h4>
                                     </div>
                                 </div>
                                 <h1 className={"mt-4"}>{title}</h1>
