@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-import projectImgTemp from '../../assets/image/thumbnail-2.png'
-import ownerProfileImgTemp from "../../assets/image/OwnerImg.png";
 import '../../assets/css/component/ProjectCard.css'
 import {getUserPic} from "../../service/adminService.js";
 import {useEffect, useState} from "react";

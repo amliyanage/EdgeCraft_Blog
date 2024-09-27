@@ -1,5 +1,6 @@
 #adminPanel{
     height: auto;
+    min-height: 100vh;
     background: linear-gradient(180deg, #374151 0%, #111827 100%);
 }
 

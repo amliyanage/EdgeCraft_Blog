@@ -57,3 +57,19 @@ export async function updateProject(formData) {
         alert(error.response.data);
     }
 }
+
+export async function deleteProject(projectId) {
+    const end_point = `http://localhost:8080/edge_craft/v1/projects/${projectId}`;
+    try {
+        const response = await axios.delete(end_point);
+        if (response.status === 200) {
+            alert(response.data)
+            return true;
+        } else {
+            alert(response.data);
+        }
+
+    } catch (error) {
+        alert(error.response.data);
+    }
+}

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import '../../../assets/css/component/admin/UpdateProjectPopup.css';
 import {useEffect, useState} from "react";
 import {saveProject, updateProject} from "../../../service/ProjectService.js";
+import DeletePopup from "./DeletePopup.jsx";
 
 const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,projectType,projectImg}) => {
 
@@ -25,6 +26,7 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
     const [option , setOption] = useState("");
     const [sendImg , setSendImg] = useState(null);
     const [date , setDate] = useState("");
+    const [deletePopup , setDeletePopup] = useState(false);
 
     useEffect(() => {
         setDate(handleCurrentTimeAndDate());
@@ -118,9 +120,15 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         }
     };
 
+    const handelDeletePopup = () => {
+        setDeletePopup(!deletePopup);
+    }
 
     return (
         <div id="UpdateProjectPopup" className="d-flex justify-content-center align-items-center">
+
+            {deletePopup && <DeletePopup close={handelDeletePopup} projectId={projectData.projectId} />}
+
             <div className="p-4">
                 <div className="btn-close btn-close-white float-end" onClick={handelProjectPouUp}></div>
                 <div className="editSection">
@@ -190,7 +198,7 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
                                 otherBtn && <button className={"btn btn-warning px-5"} onClick={updateBtnOnAction}>Update</button>
                             }
                             {
-                                otherBtn && <button className={"btn btn-danger px-5"}>Delete</button>
+                                otherBtn && <button className={"btn btn-danger px-5"} onClick={handelDeletePopup}>Delete</button>
                             }
                         </div>
                     </div>

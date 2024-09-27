@@ -1,0 +1,21 @@
+#deleteProject{
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+#deleteProject > div{
+    background: #111827;
+    animation: ani-ease-in-out 0.5s ease-in;
+}
+
+#deleteProject h1{
+    font-size: 26px;
+}
+
+@keyframes ani-ease-in-out {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
