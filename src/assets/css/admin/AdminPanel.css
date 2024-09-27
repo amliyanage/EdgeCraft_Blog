@@ -4,7 +4,7 @@
     background: linear-gradient(180deg, #374151 0%, #111827 100%);
 }
 
-#adminPanel .search{
+#adminPanel .search > :first-child{
     border-radius: 100px;
     background: rgba(31, 41, 55, 0.60);
     padding: 10px 20px;
@@ -39,6 +39,36 @@
 #adminPanel .footer h2{
     font-size: 18px;
     font-weight: 400;
+}
+
+#adminPanel .searchHistory{
+    position: absolute;
+    width: 15.5vw;
+    background: #111827;
+    z-index: 1000;
+    margin-top: 3px;
+    overflow-y: scroll;
+    padding: 15px;
+    animation: animation 0.5s ease-in;
+}
+
+#adminPanel .searchHistory::-webkit-scrollbar{
+    width: 0;
+}
+
+#adminPanel .searchHistory p{
+    font-size: 16px;
+    border-bottom: 2px solid #4B5563;
+    padding-bottom: 5px;
+}
+
+@keyframes animation {
+    0% {
+       height: 0;
+    }
+    100% {
+        height: 18vh;
+    }
 }
 
 @media screen and (max-width: 991px){

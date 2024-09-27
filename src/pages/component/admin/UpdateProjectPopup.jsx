@@ -71,7 +71,26 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         }
     }
 
+    const truncateText = (text, maxLength) => {
+        return text.length >= maxLength;
+    }
+
     const saveBtnOnAction = () => {
+
+        if (!truncateText(title, 60)){
+            alert("Title should be less than 60 characters");
+            return;
+        }
+
+        if (!truncateText(summery, 136)){
+            alert("Summery should be less than 136 characters");
+            return;
+        }
+
+        if (title === "" || description === "" || summery === "" || githubLink === "" || file === null || option === "Choose..."){
+            alert("Please fill all the fields");
+            return;
+        }
 
         const formData = new FormData();
         formData.append('projectDes', description);

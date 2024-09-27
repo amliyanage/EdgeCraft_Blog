@@ -23,6 +23,10 @@ const ProjectCard = ({ handelView , projectData }) =>{
         });
     }, []);
 
+    const truncateText = (text, maxLength) => {
+        return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    }
+
     console.log(projectData)
 
     return(
@@ -40,9 +44,9 @@ const ProjectCard = ({ handelView , projectData }) =>{
                         <h4>{projectData.date}</h4>
                     </div>
                 </div>
-                <h1 className={"mt-2"}>{projectData.projectTitle}</h1>
-                <p>{
-                    projectData.summery
+                <h1 className={"mt-2 w-100"}>{truncateText(projectData.projectTitle,60)}</h1>
+                <p className={"w-100"}>{
+                    truncateText(projectData.summery, 140)
                 }</p>
                 <div className="ownerInfo d-flex gap-3 mt-4 align-items-center">
                     <img src={userPic} alt="Owner Profile Img"/>
