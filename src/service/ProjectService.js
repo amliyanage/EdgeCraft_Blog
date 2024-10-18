@@ -124,3 +124,12 @@ export async function getFrontEndProjects(){
         alert(error.response.data);
     }
 }
+
+export async function getBackEndProjects(){
+    const end_point = "http://localhost:8080/edge_craft/v1/projects/getBackEndProject";
+    try {
+        return await axios.get(end_point);
+    } catch (error) {
+        alert(error.response.data);
+    }
+}

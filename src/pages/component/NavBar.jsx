@@ -37,20 +37,6 @@ const NavBar = ({ handelSecthion }) =>{
                         <li className="nav-item" onClick={ () => { handelCLick("Back-End") } }>
                             <a className="nav-link" href="#">Back-End</a>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Category
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li onClick={ () => { handelCLick("Java-Project") } } ><a className="dropdown-item" href="#">Java</a></li>
-                                <li onClick={ () => { handelCLick("Html-Project") } } ><a className="dropdown-item" href="#">Html</a></li>
-                                <li>
-                                    <hr className="dropdown-divider"/>
-                                </li>
-                                <li onClick={ () => { handelCLick("Js-Project") } }><a className="dropdown-item" href="#">Js</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <form className="d-flex" role="search">
                         <div className={"searchBar d-flex align-items-center gap-2"}>

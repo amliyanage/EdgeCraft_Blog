@@ -6,7 +6,7 @@ import ProjectCard from "./component/ProjectCard.jsx";
 import {useEffect, useState} from "react";
 import ViewProject from "./component/ViewProject.jsx";
 import {
-    getAllProject, getFrontEndProjects,
+    getAllProject, getBackEndProjects, getFrontEndProjects,
     getLastProject,
     getLastProjectImg,
     getProjectImg,
@@ -53,6 +53,13 @@ const HomePage = () => {
         })
     }
 
+    const loadBackEndProjects = async () => {
+        getBackEndProjects().then(response => {
+            console.log("Back End Projects",response.data);
+            setProjects(response.data);
+        })
+    }
+
     const handleSectionChange = (section) => {
         setCurrentSection(section);
 
@@ -66,6 +73,10 @@ const HomePage = () => {
             case "Front-End":
                 loadFrontEndProjects().then(r => console.log(r));
                 break;
+            case "Back-End":
+                loadBackEndProjects().then(r => console.log(r));
+                break;
+
             default:
                 loadProjects().then(r => console.log(r));
         }
@@ -92,8 +103,6 @@ const HomePage = () => {
         setLastProjectData(response)
         setLastProjectUserData(response.user)
     }
-
-
 
     return (
         <>
