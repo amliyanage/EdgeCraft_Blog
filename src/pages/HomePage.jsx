@@ -5,7 +5,13 @@ import ownerProfileImgTemp from '../assets/image/OwnerImg.png'
 import ProjectCard from "./component/ProjectCard.jsx";
 import {useEffect, useState} from "react";
 import ViewProject from "./component/ViewProject.jsx";
-import {getAllProject, getLastProject, getLastProjectImg, getProjectImg} from "../service/ProjectService.js";
+import {
+    getAllProject,
+    getLastProject,
+    getLastProjectImg,
+    getProjectImg,
+    getUiProjects
+} from "../service/ProjectService.js";
 
 const HomePage = () => {
 
@@ -33,8 +39,27 @@ const HomePage = () => {
         });
     }
 
+    const loadUiDesignProjects = async () => {
+        getUiProjects().then(response => {
+            console.log("UI Projects",response.data);
+            setProjects(response.data);
+        });
+    }
+
     const handleSectionChange = (section) => {
         setCurrentSection(section);
+
+        switch (section) {
+            case "Home":
+                loadProjects().then(r => console.log(r));
+                break;
+            case "UI Design":
+                loadUiDesignProjects().then(r => console.log(r));
+                break;
+            default:
+                loadProjects().then(r => console.log(r));
+        }
+
         setCurrentProject(null);
     }
 

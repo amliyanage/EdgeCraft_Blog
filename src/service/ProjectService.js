@@ -106,3 +106,12 @@ export async function getLastProjectImg(){
         return null;
     }
 }
+
+export async function getUiProjects(){
+    const end_point = "http://localhost:8080/edge_craft/v1/projects/getUiProject";
+    try {
+        return await axios.get(end_point);
+    } catch (error) {
+        alert(error.response.data);
+    }
+}

@@ -1,4 +1,5 @@
 #HomePage{
+    min-height: 100vh;
     height: auto;
     background: linear-gradient(180deg, #374151 0%, #111827 100%);
 }

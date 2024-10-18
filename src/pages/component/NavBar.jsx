@@ -1,7 +1,12 @@
+import PropTypes from "prop-types";
 import '../../assets/css/component/NavBar.css'
 import {SearchIcon} from "../../util/Icons.jsx";
 
 const NavBar = ({ handelSecthion }) =>{
+
+    NavBar.propTypes = {
+        handelSecthion: PropTypes.func.isRequired
+    }
 
     const handelCLick = (section) => {
         handelSecthion(section);
