@@ -4,11 +4,14 @@ import {getUserPic} from "../../service/adminService.js";
 import {useEffect, useState} from "react";
 import {getProjectImg} from "../../service/ProjectService.js";
 
-const ProjectCard = ({ handelView , projectData }) =>{
+const ProjectCard = ({ handelView , projectData , setTargetProject }) =>{
+
+
 
     ProjectCard.propTypes = {
         handelView: PropTypes.func.isRequired,
-        projectData: PropTypes.object.isRequired
+        projectData: PropTypes.object.isRequired,
+        setTargetProject: PropTypes.func.isRequired
     }
 
     const [userPic, setUserPic] = useState(null);
@@ -27,10 +30,15 @@ const ProjectCard = ({ handelView , projectData }) =>{
         return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
     }
 
+    const cardOnClick = () => {
+        handelView(projectData,"Update",projectImg);
+        setTargetProject(projectData);
+    }
+
     console.log(projectData)
 
     return(
-        <div id={"ProjectCard"} onClick={() => handelView(projectData,"Update",projectImg)}>
+        <div id={"ProjectCard"} onClick={cardOnClick}>
             <div className={"Thumbnail"}>
                 <img src={ projectImg } alt="Project Thumbnail"/>
             </div>
