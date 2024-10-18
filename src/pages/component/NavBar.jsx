@@ -2,14 +2,18 @@ import PropTypes from "prop-types";
 import '../../assets/css/component/NavBar.css'
 import {SearchIcon} from "../../util/Icons.jsx";
 
-const NavBar = ({ handelSecthion }) =>{
+const NavBar = ({ handelSection , handelSearch , search , handleSuggestionClick , searchSuggestion }) =>{
 
     NavBar.propTypes = {
-        handelSecthion: PropTypes.func.isRequired
+        handelSection: PropTypes.func.isRequired,
+        handelSearch: PropTypes.func.isRequired,
+        search: PropTypes.bool.isRequired,
+        handleSuggestionClick: PropTypes.func.isRequired,
+        searchSuggestion: PropTypes.array.isRequired
     }
 
     const handelCLick = (section) => {
-        handelSecthion(section);
+        handelSection(section);
     }
 
     return (
@@ -41,8 +45,21 @@ const NavBar = ({ handelSecthion }) =>{
                     <form className="d-flex" role="search">
                         <div className={"searchBar d-flex align-items-center gap-2"}>
                             <SearchIcon/>
-                            <input type="text" className={"bg-transparent border-0"} placeholder={"Search ..."}/>
+                            <input type="text" className={"bg-transparent border-0"} placeholder={"Search ..."}
+                                      onChange={(e) => handelSearch(e)}
+                            />
                         </div>
+                        {
+                            search && (
+                                <div className={"searchHistory"}>
+                                    {searchSuggestion.map((suggestion, index) => (
+                                        <p key={index} onClick={() => handleSuggestionClick(suggestion)}>
+                                            {suggestion}
+                                        </p>
+                                    ))}
+                                </div>
+                            )
+                        }
                     </form>
                 </div>
             </div>

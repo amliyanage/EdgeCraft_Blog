@@ -1,6 +1,5 @@
 import '../../src/assets/css/HomePage.css'
 import NavBar from "./component/NavBar.jsx";
-import lastUploadedProjectImgTemp from '../assets/image/thumbnail.png'
 import ownerProfileImgTemp from '../assets/image/OwnerImg.png'
 import ProjectCard from "./component/ProjectCard.jsx";
 import {useEffect, useState} from "react";
@@ -9,7 +8,6 @@ import {
     getAllProject, getBackEndProjects, getFrontEndProjects,
     getLastProject,
     getLastProjectImg,
-    getProjectImg,
     getUiProjects
 } from "../service/ProjectService.js";
 
@@ -25,6 +23,10 @@ const HomePage = () => {
     const [lastProjectUserData , setLastProjectUserData] = useState({});
     
     const [projectImg, setProjectImg] = useState(null);
+
+    const [searchSuggestion, setSearchSuggestion] = useState([]);
+    const [filteredProjects, setFilteredProjects] = useState([]); // For filtered projects
+    const [search, setSearch] = useState(false);
 
     useEffect(() => {
         loadProjects();
@@ -62,10 +64,9 @@ const HomePage = () => {
 
     const handleSectionChange = (section) => {
         setCurrentSection(section);
-
         switch (section) {
             case "Home":
-                loadProjects().then(r => console.log(r));
+                window.location.reload();
                 break;
             case "UI Design":
                 loadUiDesignProjects().then(r => console.log(r));
@@ -104,13 +105,38 @@ const HomePage = () => {
         setLastProjectUserData(response.user)
     }
 
+    const handelSearch = (e) => {
+        if (e.target.value === "") {
+            setCurrentSection("Home");
+        }else {
+            setCurrentSection("Search");
+        }
+        setSearch(true);
+        const searchText = e.target.value.toLowerCase();
+        const filteredSuggestions = projects.filter(project =>
+            project.projectTitle.toLowerCase().includes(searchText)
+        );
+        setSearchSuggestion(filteredSuggestions.map(proj => proj.projectTitle));
+
+        const filtered = projects.filter(project =>
+            project.projectTitle.toLowerCase().includes(searchText)
+        );
+        setFilteredProjects(filtered);
+    };
+
+    const handleSuggestionClick = (suggestion) => {
+        const selectedProject = projects.filter(project => project.projectTitle === suggestion);
+        setFilteredProjects(selectedProject);
+        setSearch(false);
+    };
+
     return (
         <>
-            <div id="HomePage" className={"w-100 d-flex justify-content-center pt-3"}>
+            <div id="HomePage" className={"w-100 d-flex justify-content-center pt-3"} onClick={() => setSearch(false)}>
 
                 <div className="w-75">
 
-                    <NavBar handelSecthion={handleSectionChange} />
+                    <NavBar handelSection={handleSectionChange} handelSearch={ handelSearch } search={search}  handleSuggestionClick={handleSuggestionClick} searchSuggestion={searchSuggestion} />
 
                     {
                         currentProject === null ? (
@@ -147,12 +173,21 @@ const HomePage = () => {
 
                                 <div className="projectCardSet">
                                     {
-                                        projects.map((project) => (
-                                            <ProjectCard key={project.projectId} projectData={project}
-                                                         handelView={handelViewProject}
-                                                         setTargetProject={setTargetProjectData}
-                                            />
-                                        ))
+                                        filteredProjects.length > 0 ? (
+                                            filteredProjects.map((project) => (
+                                                <ProjectCard key={project.projectId} projectData={project}
+                                                             handelView={handelViewProject}
+                                                             setTargetProject={setTargetProjectData}
+                                                />
+                                            ))
+                                        ) : (
+                                            projects.map((project) => (
+                                                <ProjectCard key={project.projectId} projectData={project}
+                                                             handelView={handelViewProject}
+                                                             setTargetProject={setTargetProjectData}
+                                                />
+                                            ))
+                                        )
                                     }
                                 </div>
 
