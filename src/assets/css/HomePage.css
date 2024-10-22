@@ -6,6 +6,7 @@
 
 #HomePage .wall .lastUploadProject{
     box-sizing: border-box;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 #HomePage .wall .lastUploadProject .thumbnail{

@@ -44,6 +44,9 @@ const AdminPanel = () => {
         setProjectType(projectType);
         setProjectImg(projectImg);
         setProjectPopup(!projectPopup);
+        loadProjects().then(r => {
+            console.log(r);
+        });
     }
 
     const loadProjects = async () => {

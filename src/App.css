@@ -10,3 +10,11 @@
     font-family: "Patrick Hand", cursive;
     color: #FFF;
 }
+
+.Toastify__toast-body > div:last-child {
+    color: #868686 !important; /* Change text color to Tomato or any desired color */
+}
+
+.Toastify__close-button > svg {
+    fill: #868686 !important; /* Change text color to Tomato or any desired color */
+}

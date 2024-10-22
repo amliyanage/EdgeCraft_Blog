@@ -6,7 +6,7 @@ export function getUserProjects (email) {
     try {
         return axios.get(end_point);
     } catch (error) {
-        alert(error.response.data);
+        console.log(error);
     }
 }
 
@@ -17,7 +17,7 @@ export async function getProjectImg(projectTitle) {
         const response = await axios.get(end_point, {responseType: 'blob'});
         return URL.createObjectURL(response.data);
     } catch (error) {
-        alert(error.response?.data || 'Failed to fetch image');
+        console.log(error);
         return null;
     }
 }
@@ -29,14 +29,22 @@ export async function saveProject(formData) {
         const response = await axios.post(end_point, formData);
         console.log(response);
         if (response.status === 200) {
-            alert(response.data)
-            return true;
+            return {
+                status: true,
+                data: response.data
+            };
         }
         else {
-            alert(response.data);
+            return {
+                status: false,
+                data: response.data
+            }
         }
     }catch (error) {
-        alert(error.response.data);
+        return {
+            status: false,
+            data: error.response.data
+        }
     }
 }
 
@@ -47,14 +55,22 @@ export async function updateProject(formData) {
         const response = await axios.put(end_point, formData);
         console.log(response);
         if (response.status === 200) {
-            alert(response.data)
-            return true;
+            return {
+                status: true,
+                data: response.data
+            }
         }
         else {
-            alert(response.data);
+            return {
+                status: false,
+                data: response.data
+            }
         }
     }catch (error) {
-        alert(error.response.data);
+        return {
+            status: false,
+            data: error.response.data
+        }
     }
 }
 
@@ -63,14 +79,22 @@ export async function deleteProject(projectId) {
     try {
         const response = await axios.delete(end_point);
         if (response.status === 200) {
-            alert(response.data)
-            return true;
+            return {
+                status: true,
+                data: response.data
+            }
         } else {
-            alert(response.data);
+            return {
+                status: false,
+                data: response.data
+            }
         }
 
     } catch (error) {
-        alert(error.response.data);
+        return {
+            status: false,
+            data: error.response.data
+        }
     }
 }
 
@@ -79,7 +103,7 @@ export async function getAllProject() {
     try {
         return axios.get(end_point);
     } catch (error) {
-        alert(error.response.data);
+        console.log(error);
     }
 }
 
@@ -102,7 +126,7 @@ export async function getLastProjectImg(){
         const response = await axios.get(end_point, {responseType: 'blob'});
         return URL.createObjectURL(response.data);
     } catch (error) {
-        alert(error.response?.data || 'Failed to fetch image');
+        console.log(error);
         return null;
     }
 }
@@ -112,7 +136,7 @@ export async function getUiProjects(){
     try {
         return await axios.get(end_point);
     } catch (error) {
-        alert(error.response.data);
+        console.log(error);
     }
 }
 
@@ -121,7 +145,7 @@ export async function getFrontEndProjects(){
     try {
         return await axios.get(end_point);
     } catch (error) {
-        alert(error.response.data);
+        console.log(error);
     }
 }
 
@@ -130,6 +154,6 @@ export async function getBackEndProjects(){
     try {
         return await axios.get(end_point);
     } catch (error) {
-        alert(error.response.data);
+        console.log(error);
     }
 }

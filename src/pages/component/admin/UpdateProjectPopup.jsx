@@ -3,6 +3,8 @@ import '../../../assets/css/component/admin/UpdateProjectPopup.css';
 import {useEffect, useState} from "react";
 import {saveProject, updateProject} from "../../../service/ProjectService.js";
 import DeletePopup from "./DeletePopup.jsx";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,projectType,projectImg}) => {
 
@@ -75,20 +77,20 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         return text.length >= maxLength;
     }
 
-    const saveBtnOnAction = () => {
+    const saveBtnOnAction = async () => {
 
-        if (!truncateText(title, 60)){
-            alert("Title should be less than 60 characters");
+        if (!truncateText(title, 10)){
+            toast.warning("Title should be more than 10 characters");
             return;
         }
 
         if (!truncateText(summery, 136)){
-            alert("Summery should be less than 136 characters");
+            toast.warning("Summery should be more than 136 characters");
             return;
         }
 
         if (title === "" || description === "" || summery === "" || githubLink === "" || file === null || option === "Choose..."){
-            alert("Please fill all the fields");
+            toast.warning("Please fill all the fields");
             return;
         }
 
@@ -105,11 +107,18 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         console.log(userData.email)
         console.log(formData);
 
-        saveProject(formData)
+        let response = await saveProject(formData)
+
+        if (response.status === true) {
+            toast.success("Project saved successfully");
+        } else {
+            toast.error("Failed to save project");
+        }
+
 
     }
 
-    const updateBtnOnAction = () => {
+    const updateBtnOnAction = async () => {
         const formData = new FormData();
 
         formData.append('projectId', projectData.projectId);
@@ -125,17 +134,29 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
         } else {
             fetch(projectImg)
                 .then(res => res.blob())
-                .then(blob => {
-                    const file = new File([blob], "project-thumbnail.jpg", { type: "image/jpeg" });
+                .then(async blob => {
+                    const file = new File([blob], "project-thumbnail.jpg", {type: "image/jpeg"});
                     formData.append("projectThumbnail", file);
 
-                    updateProject(formData);
+                    const response = await updateProject(formData);
+
+                    if (response.status === true) {
+                        toast.success("Project updated successfully");
+                    } else {
+                        toast.error(response.data);
+                    }
                 })
                 .catch(err => console.error("Error converting blob to file:", err));
         }
 
         if (sendImg) {
-            updateProject(formData);
+            const response = await updateProject(formData);
+
+            if (response.status === true) {
+                toast.success("Project updated successfully");
+            } else {
+                toast.error(response.data);
+            }
         }
     };
 
@@ -144,122 +165,125 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
     }
 
     return (
-        <div id="UpdateProjectPopup" className="d-flex justify-content-center align-items-center">
+        <>
+            <ToastContainer />
+            <div id="UpdateProjectPopup" className="d-flex justify-content-center align-items-center">
 
-            {deletePopup && <DeletePopup close={handelDeletePopup} projectId={projectData.projectId} />}
+                {deletePopup && <DeletePopup close={handelDeletePopup} projectId={projectData.projectId} />}
 
-            <div className="p-4">
-                <div className="btn-close btn-close-white float-end" onClick={handelProjectPouUp}></div>
-                <div className="editSection">
-                    <div>
-                        <div className="form-floating mb-4">
-                            <input type="text" className="form-control" placeholder="Title" onChange={(e) => {
-                                setTitle(e.target.value)
-                            }}
-                            defaultValue={title}
-                            />
-                            <label htmlFor="floatingInput">Title</label>
-                        </div>
-                        <div className="form-floating mb-4">
-                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                      style={{height: '300px'}} onChange={(e) => {
-                                setDescription(e.target.value)
-                            }}
-                            defaultValue={description}
-                            ></textarea>
-                            <label htmlFor="floatingTextarea2">Description</label>
-                        </div>
-                        <div className="form-floating mb-4">
-                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                      style={{height: '200px'}} onChange={(e) => {
-                                setSummery(e.target.value)
-                            }}
-                            defaultValue={summery}
-                            ></textarea>
-                            <label htmlFor="floatingTextarea2">Summery</label>
-                        </div>
-                        <div className={"d-flex align-items-center mb-4 gap-4"}>
-                            <div className="input-group ">
-                                <input type="file" className="form-control" onChange={(e) => {
-                                    handelThumbnail(e)
+                <div className="p-4">
+                    <div className="btn-close btn-close-white float-end" onClick={handelProjectPouUp}></div>
+                    <div className="editSection">
+                        <div>
+                            <div className="form-floating mb-4">
+                                <input type="text" className="form-control" placeholder="Title" onChange={(e) => {
+                                    setTitle(e.target.value)
                                 }}
-                                defaultValue={file}
+                                defaultValue={title}
                                 />
-                                <label className="input-group-text" htmlFor="inputGroupFile02">Upload</label>
+                                <label htmlFor="floatingInput">Title</label>
                             </div>
-                            <div className="input-group">
-                                <label className="input-group-text" htmlFor="inputGroupSelect01">Options</label>
-                                <select className="form-select" id="inputGroupSelect01" onChange={(e) => {
-                                    setOption(e.target.value)
+                            <div className="form-floating mb-4">
+                                <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                          style={{height: '300px'}} onChange={(e) => {
+                                    setDescription(e.target.value)
                                 }}
-                                defaultValue={option}
-                                onSelect={option}>
-                                    <option selected>Choose...</option>
-                                    <option value="UI Design">UI Design</option>
-                                    <option value="Front End">Front End</option>
-                                    <option value="Backend">Backend</option>
-                                    <option value="Server">Server</option>
-                                </select>
+                                defaultValue={description}
+                                ></textarea>
+                                <label htmlFor="floatingTextarea2">Description</label>
+                            </div>
+                            <div className="form-floating mb-4">
+                                <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                          style={{height: '200px'}} onChange={(e) => {
+                                    setSummery(e.target.value)
+                                }}
+                                defaultValue={summery}
+                                ></textarea>
+                                <label htmlFor="floatingTextarea2">Summery</label>
+                            </div>
+                            <div className={"d-flex align-items-center mb-4 gap-4"}>
+                                <div className="input-group ">
+                                    <input type="file" className="form-control" onChange={(e) => {
+                                        handelThumbnail(e)
+                                    }}
+                                    defaultValue={file}
+                                    />
+                                    <label className="input-group-text" htmlFor="inputGroupFile02">Upload</label>
+                                </div>
+                                <div className="input-group">
+                                    <label className="input-group-text" htmlFor="inputGroupSelect01">Options</label>
+                                    <select className="form-select" id="inputGroupSelect01" onChange={(e) => {
+                                        setOption(e.target.value)
+                                    }}
+                                    defaultValue={option}
+                                    onSelect={option}>
+                                        <option selected>Choose...</option>
+                                        <option value="UI Design">UI Design</option>
+                                        <option value="Front End">Front End</option>
+                                        <option value="Backend">Backend</option>
+                                        <option value="Server">Server</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-floating mb-4">
+                                <input type="text" className="form-control" placeholder="GitHub Link" onChange={(e) => {
+                                    setGithubLink(e.target.value)
+                                }} defaultValue={githubLink}
+                                />
+                                <label htmlFor="floatingInput">GitHub Link</label>
+                            </div>
+                            <div className={"d-flex gap-4"}>
+                                {
+                                    saveBtn && <button className={"btn btn-success px-5"} onClick={saveBtnOnAction}>Save</button>
+                                }
+                                {
+                                    otherBtn && <button className={"btn btn-warning px-5"} onClick={updateBtnOnAction}>Update</button>
+                                }
+                                {
+                                    otherBtn && <button className={"btn btn-danger px-5"} onClick={handelDeletePopup}>Delete</button>
+                                }
                             </div>
                         </div>
-                        <div className="form-floating mb-4">
-                            <input type="text" className="form-control" placeholder="GitHub Link" onChange={(e) => {
-                                setGithubLink(e.target.value)
-                            }} defaultValue={githubLink}
-                            />
-                            <label htmlFor="floatingInput">GitHub Link</label>
-                        </div>
-                        <div className={"d-flex gap-4"}>
-                            {
-                                saveBtn && <button className={"btn btn-success px-5"} onClick={saveBtnOnAction}>Save</button>
-                            }
-                            {
-                                otherBtn && <button className={"btn btn-warning px-5"} onClick={updateBtnOnAction}>Update</button>
-                            }
-                            {
-                                otherBtn && <button className={"btn btn-danger px-5"} onClick={handelDeletePopup}>Delete</button>
-                            }
-                        </div>
-                    </div>
-                    <div className={"pe-3"}>
-                        <div className={"preview w-100 h-100"}>
+                        <div className={"pe-3"}>
+                            <div className={"preview w-100 h-100"}>
 
-                            <div id={"viewProject"} className={"d-flex flex-column align-items-center"}>
-                                <div className="infoHead d-flex gap-3 align-items-center mt-5">
-                                <div className={"w-auto"}>
-                                        <h4>{option}</h4>
+                                <div id={"viewProject"} className={"d-flex flex-column align-items-center"}>
+                                    <div className="infoHead d-flex gap-3 align-items-center mt-5">
+                                    <div className={"w-auto"}>
+                                            <h4>{option}</h4>
+                                        </div>
+                                        <div className="uploadedDate d-flex align-items-center gap-3">
+                                            <div></div>
+                                            <h4>{date}</h4>
+                                        </div>
                                     </div>
-                                    <div className="uploadedDate d-flex align-items-center gap-3">
-                                        <div></div>
-                                        <h4>{date}</h4>
+                                    <h1 className={"mt-4"}>{title}</h1>
+                                    <div className="ownerInfo d-flex gap-3 mt-4 align-items-center">
+                                        <img src={userPic} alt="Owner Profile Img"/>
+                                        <div>
+                                            <h2>{userData.userName}</h2>
+                                            <h3>{userData.role}</h3>
+                                        </div>
                                     </div>
-                                </div>
-                                <h1 className={"mt-4"}>{title}</h1>
-                                <div className="ownerInfo d-flex gap-3 mt-4 align-items-center">
-                                    <img src={userPic} alt="Owner Profile Img"/>
-                                    <div>
-                                        <h2>{userData.userName}</h2>
-                                        <h3>{userData.role}</h3>
-                                    </div>
-                                </div>
-                                <img className={"mt-5"} src={file} alt="Project Thumbnail"/>
-                                <p className={"mt-5"}>
-                                    {summery}
-                                </p>
-                                <p className={"mt-4"}>
-                                    {description}
-                                </p>
+                                    <img className={"mt-5"} src={file} alt="Project Thumbnail"/>
+                                    <p className={"mt-5"}>
+                                        {summery}
+                                    </p>
+                                    <p className={"mt-4"}>
+                                        {description}
+                                    </p>
 
-                                <a href="">
-                                    Git Hub - {githubLink}
-                                </a>
+                                    <a href="">
+                                        Git Hub - {githubLink}
+                                    </a>
+                                </div>
+
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

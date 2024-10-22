@@ -144,7 +144,7 @@ const HomePage = () => {
 
                                 {
                                     currentSection === "Home" ? (
-                                        <div className="lastUploadProject d-flex h-100 gap-4 flex-column flex-lg-row">
+                                        <div className="lastUploadProject d-grid h-100 gap-4 flex-column flex-lg-row">
                                             <div className={"thumbnail"}>
                                                 <img src={projectImg} alt="Last Uploaded Project Image"/>
                                             </div>

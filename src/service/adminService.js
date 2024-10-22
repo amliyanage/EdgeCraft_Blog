@@ -7,7 +7,6 @@ export const adminRegister = async (formData) => {
     try {
         const response = await axios.post(end_point, formData);
         if (response.status === 201) {
-            alert(response.data)
             return true;
         }
         else {
