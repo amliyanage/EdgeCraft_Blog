@@ -41,7 +41,7 @@ const ViewProject = ({ projectData }) => {
                     <h4>{projectData.date}</h4>
                 </div>
             </div>
-            <h1 className={"mt-4"}>Understanding color theory: the color wheel and finding complementary colors</h1>
+            <h1 className={"mt-4"}>{projectData.projectTitle}</h1>
             <div className="ownerInfo d-flex gap-3 mt-4 align-items-center">
                 <img src={ownerProfileImg} alt="Owner Profile Img"/>
                 <div>

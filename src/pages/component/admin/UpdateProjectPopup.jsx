@@ -220,7 +220,7 @@ const UpdateProjectPopup = ({projectData,handelProjectPouUp,userData,userPic,pro
                                         <option selected>Choose...</option>
                                         <option value="UI Design">UI Design</option>
                                         <option value="Front End">Front End</option>
-                                        <option value="Backend">Backend</option>
+                                        <option value="Back End">Back End</option>
                                         <option value="Server">Server</option>
                                     </select>
                                 </div>

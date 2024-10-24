@@ -6,15 +6,13 @@
 
 #HomePage .wall .lastUploadProject{
     box-sizing: border-box;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1.5fr 1fr;
 }
 
 #HomePage .wall .lastUploadProject .thumbnail{
     border-radius: 10px;
     object-fit: cover;
     overflow: hidden;
-    width: 93vw;
-    height: 42vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,6 +116,21 @@
     padding-bottom: 5px;
 }
 
+
+#ProjectCard .infoHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#ProjectCard .infoHead *{
+    width: auto !important;
+}
+
+#ProjectCard .projectInfo .infoHead .uploadedDate div{
+    width: 6px !important;
+}
+
 @keyframes animation {
     0% {
         height: 0;
@@ -144,7 +157,8 @@
 
     #HomePage .wall .lastUploadProject{
         padding-bottom: 15px;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.10);;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.10);
+        display: flex !important;
     }
     #HomePage .projectCardSet {
         grid-template-columns: repeat(1, 1fr);

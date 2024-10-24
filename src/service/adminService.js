@@ -26,10 +26,16 @@ export const adminLogin = async (params) => {
             params: params
         });
         if (response.status === 200) {
-            return true
+            return {
+                status: true,
+                message: "Login successful"
+            }
         }
     } catch (error) {
-        alert(error.response.data);
+        return {
+            status: false,
+            message: error.response.data
+        };
     }
 }
 

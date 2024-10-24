@@ -21,7 +21,6 @@ const DeletePopup = ({close,projectId}) => {
 
     return(
         <>
-            <ToastContainer />
             <div id={"deleteProject"}
                  className={"position-absolute z-3 d-flex justify-content-center align-items-center w-100 h-100"}>
                 <div className={"w-25 text-center p-5"}>

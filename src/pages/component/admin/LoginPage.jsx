@@ -80,8 +80,10 @@ const LoginPage = ({ handelLoginToSystem }) => {
         };
 
         adminLogin(params).then(r => {
-            if (r) {
+            if (r.status === true) {
                  handelLoginToSystem(email);
+            } if(r.status === false) {
+                toast.error(r.message);
             }
         });
     }
